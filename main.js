@@ -20,8 +20,10 @@ const { unzip, readDir, grayScale } = IOhandler;
 let firstPNG;
 readDir(pathUnzipped)
 .then(result => {
-  let firstPNG = result[0];
-  grayScale(firstPNG, pathProcessed);
+  console.log(result);
+  result.forEach(filePath => {
+    grayScale(filePath, pathProcessed);
+  })
 })
 .then(error => console.log(error));
 
