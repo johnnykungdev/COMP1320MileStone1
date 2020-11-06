@@ -49,7 +49,27 @@ const unzip = (pathIn, pathOut) => {
  * @return {promise}
  */
 const readDir = dir => {
-  
+  //"dir" is the path of firectory being read
+  const listPNGPath = (files) => {
+    let pathList = [];
+    files.forEach(fileName => {
+      if (fileName.includes(".png")) {
+        pathList.push(dir + `/${fileName}`);
+      }
+    })
+    return pathList;
+  }
+
+  return new Promise((resolve, reject) => {
+    fs.readdir(dir, (err, files) => {
+      if (err) {
+        reject(err);
+      } else {
+        const pathList = listPNGPath(files);
+        resolve(pathList);
+      }
+    })
+  })
 };
 
 /**
