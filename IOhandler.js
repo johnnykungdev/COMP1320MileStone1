@@ -91,7 +91,6 @@ const grayScale = (pathIn, pathOut) => {
   fs.createReadStream(pathIn)
   .pipe(new PNG({ filterType: 4 }))
   .on("parsed", function(){
-    console.log("parsed");
     for (var y = 0; y < this.height; y++) {
       for (var x = 0; x < this.width; x++) {
         var idx = (this.width * y + x) << 2;

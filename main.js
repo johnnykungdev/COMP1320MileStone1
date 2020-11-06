@@ -15,10 +15,6 @@ const IOhandler = require("./IOhandler"),
 
 const { unzip, readDir, grayScale } = IOhandler;
 
-// unzip(zipFilePath, pathUnzipped);
-// readDir(pathUnzipped);
-let firstPNG;
-
 unzip(zipFilePath, pathUnzipped)
 .then(() => {
   return readDir(pathUnzipped);
