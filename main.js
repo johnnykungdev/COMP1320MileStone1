@@ -13,4 +13,7 @@ const IOhandler = require("./IOhandler"),
   pathUnzipped = `${__dirname}/unzipped`,
   pathProcessed = `${__dirname}/grayscaled`;
 
+const unzip = IOhandler.unzip;
+
+unzip(zipFilePath, pathUnzipped);
 

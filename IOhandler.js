@@ -22,7 +22,24 @@ const unzipper = require('unzipper'),
  * @return {promise}
  */
 const unzip = (pathIn, pathOut) => {
+  return new Promise((resolve, reject) => {
+    fs.createReadStream(pathIn)
+    .pipe(unzipper.Extract({path: pathOut}))
+    .on('finish', () => {
+      console.log("extracting finish");
+      resolve("extracted successfully");
+    })
+    .on('error', () => {
+      reject("error");
+    })
+  })
 
+  /**
+   * sugar syntax turning to promise
+  return fs.createReadStream(pathIn).pipe(unzipper.Extract({path: pathOut})).promise()
+  .then(result => console.log(result))
+  .catch(error => console.log(error));
+  */
 };
 
 /**
@@ -32,7 +49,7 @@ const unzip = (pathIn, pathOut) => {
  * @return {promise}
  */
 const readDir = dir => {
-
+  
 };
 
 /**
@@ -44,7 +61,7 @@ const readDir = dir => {
  * @return {promise}
  */
 const grayScale = (pathIn, pathOut) => {
-
+  
 };
 
 module.exports = {
