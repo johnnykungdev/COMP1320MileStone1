@@ -88,23 +88,33 @@ const RGBtoGray = (r, g, b) => {
 const grayScale = (pathIn, pathOut) => {
   const pathArray = pathIn.split("/");
   const fileName = pathArray[pathArray.length - 1];
-  fs.createReadStream(pathIn)
-  .pipe(new PNG({ filterType: 4 }))
-  .on("parsed", function(){
-    for (var y = 0; y < this.height; y++) {
-      for (var x = 0; x < this.width; x++) {
-        var idx = (this.width * y + x) << 2;
 
-        //do simple averaging algorithm
-        const r = this.data[idx], g = this.data[idx + 1], b = this.data[idx + 2];
-        
-        this.data[idx] = RGBtoGray(r, g, b);
-        this.data[idx + 1] = RGBtoGray(r, g, b);
-        this.data[idx + 2] = RGBtoGray(r, g, b);
+  return new Promise((resolve, reject) => {
+    fs.createReadStream(pathIn)
+    .pipe(new PNG({ filterType: 4 }))
+    .on("parsed", function(){
+      for (var y = 0; y < this.height; y++) {
+        for (var x = 0; x < this.width; x++) {
+          var idx = (this.width * y + x) << 2;
+  
+          //do simple averaging algorithm
+          const r = this.data[idx], g = this.data[idx + 1], b = this.data[idx + 2];
+          
+          this.data[idx] = RGBtoGray(r, g, b);
+          this.data[idx + 1] = RGBtoGray(r, g, b);
+          this.data[idx + 2] = RGBtoGray(r, g, b);
+        }
       }
-    }
-    this.pack().pipe(fs.createWriteStream(`${pathOut}/${fileName}`));
-  })
+      this.pack().pipe(fs.createWriteStream(`${pathOut}/${fileName}`))
+      .on('finish', () => {
+        console.log('grayScaled finsihed');
+        resolve('grayScaled images created successfully.');
+      });
+    })
+    .on('error', () => {
+      reject('grayScaling error.');
+    })
+  });
 };
 
 module.exports = {
