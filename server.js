@@ -42,19 +42,6 @@ const server = http.createServer((req, res) => {
             res.write("Internal Sever Error")
             res.end()
         })
-        // const form = formidable({ multiples: true })
-        
-        // form.parse(req, (err, fields, files) => {
-        //     grayScale(files.myFile.path, `${__dirname}/public/grayScaled`)
-        //     .then(data => {
-        //         const newPath = data.replace(`${__dirname}`, 'http://localhost:8000')
-        //         res.writeHead(200, { "Content-Type": "application/json" })
-        //         res.write(JSON.stringify({
-        //             imgSrc: newPath
-        //         }))
-        //         res.end()
-        //     })
-        // })
     } 
     else if (path.includes('.png')) {
         const matchedContentType = contentTypeList.find(fileType => typeFile.includes(fileType.type))
