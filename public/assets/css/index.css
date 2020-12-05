@@ -1,0 +1,43 @@
+h1 {
+    text-align: center;
+}
+
+.imageContainer {
+    position: relative;
+    margin: auto;
+    height: 300px;
+    width: 300px;
+    border: 1px solid black;
+}
+
+#upload {
+    position: absolute;
+    border: 1px solid black;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 12px;
+    cursor: pointer;
+}
+
+#imageInput {
+    display: none;
+}
+
+#imagePreview {
+    width: 100%;
+    height: 100%;
+}
+
+#submit {
+    position: absolute;
+    border: 1px solid purple;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#grayScaled {
+    width: 300px;
+    height: 300px;
+}

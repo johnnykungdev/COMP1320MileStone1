@@ -87,8 +87,8 @@ const RGBtoGray = (r, g, b) => {
 
 const grayScale = (pathIn, pathOut) => {
   const pathArray = pathIn.split("/");
-  const fileName = pathArray[pathArray.length - 1];
-
+  const fileName = pathArray[pathArray.length - 1] + ".png";
+  
   return new Promise((resolve, reject) => {
     fs.createReadStream(pathIn)
     .pipe(new PNG({ filterType: 4 }))
@@ -107,12 +107,9 @@ const grayScale = (pathIn, pathOut) => {
       }
       this.pack().pipe(fs.createWriteStream(`${pathOut}/${fileName}`))
       .on('finish', () => {
-        console.log('grayScaled finsihed');
-        resolve('grayScaled images created successfully.');
+        console.log('grayScaled finished');
+        resolve(`${pathOut}/${fileName}`);
       });
-    })
-    .on('error', () => {
-      reject('grayScaling error.');
     })
   });
 };
