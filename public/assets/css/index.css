@@ -30,12 +30,12 @@ h1 {
     position: relative;
 }
 
+.submitContainer {
+    text-align: center;
+}
+
 #submit {
-    position: absolute;
     border: 1px solid purple;
-    top: 80%;
-    left: 50%;
-    transform: translate(-50%, -50%);
 }
 
 #grayScaledPreview {

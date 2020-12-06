@@ -6,7 +6,11 @@ function imageUpload(req) {
 
         form.parse(req, (err, fields, files) => {
             if (err) rejects(err)
-            resolve(files)
+            console.log('fields', fields)
+            resolve({
+                fields,
+                files
+            })
         })
     })
 
