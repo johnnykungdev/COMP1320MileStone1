@@ -29,7 +29,7 @@ const server = http.createServer((req, res) => {
         .then(data => {
             return grayScale(data.myFile.path, `${__dirname}/public/grayScaled`)
         })
-        .then(data => {
+        .then(data => {``
             const newPath = data.replace(`${__dirname}`, 'http://localhost:8000')
             res.writeHead(200, { "Content-Type": "application/json" })
             res.write(JSON.stringify({
@@ -51,8 +51,10 @@ const server = http.createServer((req, res) => {
     }
     else {
         const matchedContentType = contentTypeList.find(fileType => typeFile.includes(fileType.type))
+        console.log(matchedContentType)
         if (matchedContentType) {
-            serveStaticFile(res, `${__dirname}/public/${req.url}`, matchedContentType, 200)
+            const contentType = matchedContentType.contentType
+            serveStaticFile(res, `${__dirname}/public/${req.url}`, contentType, 200)
         }
     }
 })
